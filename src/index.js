@@ -14,17 +14,11 @@ async function whatsapp(form) {
       if (err) {
         reject(err);
       } else {
+        /// Read the response
         res.on("data", (chunk) => { result += chunk; });
         res.on("end", () => {
-          var data = JSON.parse(result);
-          if (data.ok) {
-            core.setOutput("slack_result", result);
-            resolve(data);
-          } else {
-            core.setFailed(data.error);
-            reject(data.error);
-          }
-        });
+          console.log(result);
+        });     
       }
     });
   });
