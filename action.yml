@@ -32,6 +32,6 @@ runs:
 
     - uses: ./src/
       with:
-        who-to-greet: 'Mona the Octocat' 
+        path: '' 
 
 

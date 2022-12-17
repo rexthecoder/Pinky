@@ -4,6 +4,34 @@ const FormData = require('form-data');
 
 
 
+/// Send file to whatsapp
+async function whatsapp(form) {
+  return new Promise((resolve, reject) => {
+
+    var result = "";
+    form.submit("https://api.whatsapp.com/send?phone=233544608462&text=Hi", (err, res) => {
+      if (err) {
+        reject(err);
+      } else {
+        res.on("data", (chunk) => { result += chunk; });
+        res.on("end", () => {
+          var data = JSON.parse(result);
+          if (data.ok) {
+            core.setOutput("result", result);
+            resolve(data);
+          } else {
+            core.setFailed(data.error);
+            reject(data.error);
+          }
+        });
+      }
+    });
+  });
+}
+
+      
+
+
 // Send File to client slack channel
 async function slack(form) {
   return new Promise((resolve, reject) => {
@@ -52,7 +80,7 @@ async function run() {
 
 
 
-    await slack(form);
+    await whatsapp(form);
 
 
   } catch (error) {
