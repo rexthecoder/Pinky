@@ -1,13 +1,37 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
+branding:
+  icon: 'heart'
+  color: 'blue'
 inputs:
   who-to-greet:  # id of input
     description: 'Who to greet'
     required: true
     default: 'World'
+  flutter_version:
+    description: 'Flutter version'
+    default: '3.3.3'
+  flutter_channel:
+    description: 'Flutter channel'
+    default: 'stable'
+  
 outputs:
   time: # id of output
     description: 'The time we greeted you'
 runs:
   using: 'node16'
   main: 'dist/index.js'
+  steps:
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '12.x'
+    - uses: subosito/flutter-action@v1
+      with:
+        flutter-version: ${{inputs.flutter_version}}
+        channel: ${{inouts.flutter_channel}}
+    - run: flutter pub get
+    - run: flutter build apk 
+
+  
+
+
