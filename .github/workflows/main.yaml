@@ -14,4 +14,4 @@ jobs:
         id: hello
       # Use the output from the `hello` step
       - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+        run: echo "The time was ${{ steps.hello.outputs.slack_result }}"

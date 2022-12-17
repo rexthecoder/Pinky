@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const FormData = require('form-data');
+var fs = require('fs');
 
 
 
