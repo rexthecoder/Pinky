@@ -5,10 +5,6 @@ branding:
   color: 'blue'
 
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
 
   flutter_version:
     description: 'Flutter version'
@@ -21,9 +17,6 @@ inputs:
     required: false
     default: 'stable'
 
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
 
 runs:
   using: "composite"
@@ -42,8 +35,10 @@ runs:
     - run: flutter build apk 
       shell: bash
 
-  using: 'node16'
-  main: 'dist/index.js'
+    - uses: ./src/ # Uses an action in the root directory
+      id: hello
+      with:
+        who-to-greet: 'Mona the Octocat'
 
   
 
