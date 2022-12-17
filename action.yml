@@ -20,11 +20,7 @@ inputs:
 
 runs:
   using: "composite"
-  steps:
-    - uses: actions/setup-java@v1
-      with:
-        java-version: '12.x'
-  
+  steps:  
     - uses: subosito/flutter-action@v1
       with:
         flutter-version: ${{inputs.flutter_version}}
@@ -34,11 +30,8 @@ runs:
     # - run: flutter build apk 
     #   shell: bash
 
-    - uses: ./src/ # Uses an action in the root directory
-      id: hello
+    - uses: ./src/
       with:
-        who-to-greet: 'Mona the Octocat'
-
-  
+        who-to-greet: 'Mona the Octocat' 
 
 

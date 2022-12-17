@@ -1,13 +1,29 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  path:  # id of input
+    description: 'Path to file'
     required: true
-    default: 'World'
+  token: 
+    description: 'Slack token'
+    required: true
+  channel:
+    description: 'Slack channels'
+    required: false
+  filename: 
+    description: 'Filename of file'
+    required: false
+  filetype:
+    description: 'A file type identifier.'
+    required: false
+  comment:
+    description: 'The message text introducing the file in specified channels.'
+    required: false
+
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  slack_result: # id of output
+    description: 'Output from slack'
+
 runs:
   using: 'node16'
   main: 'dist/index.js'
