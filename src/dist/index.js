@@ -11221,7 +11221,7 @@ async function whatsapp(form) {
         /// Read the response
         res.on("data", (chunk) => { result += chunk; });
         res.on("end", () => {
-          console.log(result);
+          core.setOutput("slack_result", result);
         });     
       }
     });
