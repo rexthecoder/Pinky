@@ -9,16 +9,17 @@ inputs:
     description: 'Who to greet'
     required: true
     default: 'World'
+
   flutter_version:
     description: 'Flutter version'
-    default: '3.3.3'
     required: false
+    default: '3.3.3'
+
 
   flutter_channel:
     description: 'Flutter channel'
-    default: 'stable'
     required: false
-
+    default: 'stable'
 
 outputs:
   time: # id of output
@@ -35,8 +36,9 @@ runs:
       with:
         flutter-version: ${{inputs.flutter_version}}
         channel: ${{inputs.flutter_channel}}
-    
+      shell: bash
     - run: flutter pub get
+      
     - run: flutter build apk 
 
   
