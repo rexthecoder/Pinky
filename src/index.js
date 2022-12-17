@@ -64,7 +64,7 @@ async function slack(form) {
 async function run() {
   try {
     const token = core.getInput('token');
-    const path = core.getInput('path');
+    // const path = core.getInput('path');
     const channel = core.getInput('channel');
     const filename = core.getInput('filename');
     const filetype = core.getInput('filetype');
@@ -73,7 +73,7 @@ async function run() {
 
     var form = new FormData();
     form.append('token', token);
-    form.append('file', fs.createReadStream(path));
+    // form.append('file', fs.createReadStream(path));
     if (filename) form.append('filename', filename);
     if (channel) form.append('channels', channel);
     if (filetype) form.append('filetype', filetype);
