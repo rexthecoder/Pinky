@@ -1,0 +1,15 @@
+{
+  "name": "pinky",
+  "version": "1.0.0",
+  "description": "Flutter git action that makes you do more",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1"
+  }
+}
