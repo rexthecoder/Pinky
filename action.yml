@@ -23,7 +23,6 @@ outputs:
 
 runs:
   using: "composite"
-  main: 'dist/index.js'
   steps:
     - uses: actions/setup-java@v1
       with:
