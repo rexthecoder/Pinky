@@ -12,9 +12,12 @@ inputs:
   flutter_version:
     description: 'Flutter version'
     default: '3.3.3'
+    required: false
+
   flutter_channel:
     description: 'Flutter channel'
     default: 'stable'
+    required: false
 
 
 outputs:
