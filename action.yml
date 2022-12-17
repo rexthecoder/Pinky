@@ -31,7 +31,10 @@ runs:
     #   shell: bash
 
     - uses: ./src/
+      id: hello
       with:
         path: '' 
 
+      run: echo "The time was ${{ steps.hello.outputs.slack_result }}"
+      shell: bash
 
