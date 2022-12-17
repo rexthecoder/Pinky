@@ -35,6 +35,6 @@ runs:
       with:
         path: '' 
 
-      run: echo "The time was ${{ steps.hello.outputs.slack_result }}"
+    - run: echo "The time was ${{ steps.hello.outputs.slack_result }}"
       shell: bash
 
