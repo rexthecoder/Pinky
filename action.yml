@@ -36,10 +36,10 @@ runs:
       with:
         flutter-version: ${{inputs.flutter_version}}
         channel: ${{inputs.flutter_channel}}
-      shell: bash
     - run: flutter pub get
-      
+      shell: bash
     - run: flutter build apk 
+      shell: bash
 
   
 
