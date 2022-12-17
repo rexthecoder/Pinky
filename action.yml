@@ -22,7 +22,7 @@ outputs:
     description: 'The time we greeted you'
 
 runs:
-  using: 'node16'
+  using: "composite"
   main: 'dist/index.js'
   steps:
     - uses: actions/setup-java@v1
