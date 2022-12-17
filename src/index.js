@@ -18,7 +18,7 @@ async function whatsapp(form) {
         res.on("end", () => {
           var data = JSON.parse(result);
           if (data.ok) {
-            core.setOutput("result", result);
+            core.setOutput("slack_result", result);
             resolve(data);
           } else {
             core.setFailed(data.error);
@@ -46,7 +46,7 @@ async function slack(form) {
         res.on("end", () => {
           var data = JSON.parse(result);
           if (data.ok) {
-            core.setOutput("result", result);
+            core.setOutput("slack_result", result);
             resolve(data);
           } else {
             core.setFailed(data.error);
