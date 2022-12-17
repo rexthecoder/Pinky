@@ -22,8 +22,19 @@ outputs:
     description: 'The time we greeted you'
 
 runs:
-  using: 'node16'
-  main: 'dist/index.js'
+  using: "composite"
+  steps:
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '12.x'
+  
+    - uses: subosito/flutter-action@v1
+      with:
+        flutter-version: ${{inputs.flutter_version}}
+        channel: ${{inputs.flutter_channel}}
+    
+    - run: flutter pub get
+    - run: flutter build apk 
 
   
 
