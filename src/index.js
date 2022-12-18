@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const FormData = require('form-data');
-const telegram = require('./utilities/telegram_bot');
-const slack = require('./utilities/slack_bot');
+const { telegramSend } = require('./utilities/telegram_bot');
+const { slack } = require('./utilities/slack_bot');
 var fs = require('fs');
 
 
@@ -17,12 +17,12 @@ async function run() {
     const telegram_token = core.getInput('telegram_token');
     const telegram_chat_id = core.getInput('telegram_chat_id');
 
-    
+
     /// Send file to telegram incase the token is provided
     if (telegram_token && telegram_chat_id) {
-      telegram.telegramSend(telegram_token, fs.createReadStream(path), telegram_chat_id);
+      telegramSend(telegram_token, fs.createReadStream(path), telegram_chat_id);
     }
-    
+
     /// Send file to slack incase the token is provided
     if (slacktoken) {
       var form = new FormData();
@@ -33,9 +33,9 @@ async function run() {
       if (filetype) form.append('filetype', filetype);
       if (comment) form.append('initial_comment', initial_comment);
 
-   
 
-      slack.send(form);
+
+      slack(form);
     }
 
 

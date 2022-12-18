@@ -2,7 +2,7 @@ const core = require('@actions/core');
 const { manageError } = require('./form_error');
 
 // Send File to client slack channel
-async function send(form) {
+async function slack(form) {
     return new Promise((resolve, reject) => {
         var result = "";
         form.submit("https://slack.com/api/files.upload", (err, res) => {
@@ -16,4 +16,4 @@ async function send(form) {
 }
 
 
-module.exports = telegramSend;
+module.exports = slack;

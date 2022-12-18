@@ -4235,7 +4235,7 @@ const core = __nccwpck_require__(2186);
 const { manageError } = __nccwpck_require__(1027);
 
 // Send File to client slack channel
-async function send(form) {
+async function slack(form) {
     return new Promise((resolve, reject) => {
         var result = "";
         form.submit("https://slack.com/api/files.upload", (err, res) => {
@@ -4249,7 +4249,7 @@ async function send(form) {
 }
 
 
-module.exports = telegramSend;
+module.exports = slack;
 
 /***/ }),
 
@@ -4452,8 +4452,8 @@ var __webpack_exports__ = {};
 (() => {
 const core = __nccwpck_require__(2186);
 const FormData = __nccwpck_require__(4334);
-const telegram = __nccwpck_require__(4626);
-const slack = __nccwpck_require__(7059);
+const { telegramSend } = __nccwpck_require__(4626);
+const { slack } = __nccwpck_require__(7059);
 var fs = __nccwpck_require__(5747);
 
 
@@ -4469,12 +4469,12 @@ async function run() {
     const telegram_token = core.getInput('telegram_token');
     const telegram_chat_id = core.getInput('telegram_chat_id');
 
-    
+
     /// Send file to telegram incase the token is provided
     if (telegram_token && telegram_chat_id) {
-      telegram.telegramSend(telegram_token, fs.createReadStream(path), telegram_chat_id);
+      telegramSend(telegram_token, fs.createReadStream(path), telegram_chat_id);
     }
-    
+
     /// Send file to slack incase the token is provided
     if (slacktoken) {
       var form = new FormData();
@@ -4485,9 +4485,9 @@ async function run() {
       if (filetype) form.append('filetype', filetype);
       if (comment) form.append('initial_comment', initial_comment);
 
-   
 
-      slack.send(form);
+
+      slack(form);
     }
 
 
