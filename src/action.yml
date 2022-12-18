@@ -4,9 +4,16 @@ inputs:
   path:  # id of input
     description: 'Path to file'
     required: true
-  token: 
+  slack_token: 
     description: 'Slack token'
-    required: true
+    required: false
+  telegram_token: 
+    description: 'Telegram token'
+    required: false
+  telegram_chat_id:
+    description: 'Telegram chat id'
+    required: false
+  
   channel:
     description: 'Slack channels'
     required: false

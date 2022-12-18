@@ -11,29 +11,68 @@ inputs:
     required: false
     default: '3.3.3'
 
-
   flutter_channel:
     description: 'Flutter channel'
     required: false
     default: 'stable'
 
+  path:  # id of input
+    description: 'Path to file'
+    required: true
+
+  slack_token:
+    description: 'Slack token'
+    required: false
+
+  telegram_token:
+    description: 'Telegram token'
+    required: false
+
+  telegram_chat_id:
+    description: 'Telegram chat id'
+    required: false
+
+  channel:
+    description: 'Slack channels'
+    required: false
+
+  filename: 
+    description: 'Filename of file'
+    required: false
+    
+  filetype:
+    description: 'A file type identifier.'
+    required: false
+
+  comment:
+    description: 'The message text introducing the file in specified channels.'
+    required: false
+
+
 
 runs:
   using: "composite"
   steps:  
-    # - uses: subosito/flutter-action@v1
-    #   with:
-    #     flutter-version: ${{inputs.flutter_version}}
-    #     channel: ${{inputs.flutter_channel}}
-    # - run: flutter pub get
-    #   shell: bash
-    # - run: flutter build apk 
-    #   shell: bash
+    - uses: subosito/flutter-action@v1
+      with:
+        flutter-version: ${{inputs.flutter_version}}
+        channel: ${{inputs.flutter_channel}}
+    - run: flutter pub get
+      shell: bash
+    - run: flutter build apk 
+      shell: bash
 
     - uses: ./src/
       id: hello
       with:
-        path: '' 
+        path: ${{inputs.path}}
+        slack_token: ${{inputs.slack_token}}
+        telegram_token: ${{inputs.telegram_token}}
+        telegram_chat_id: ${{inputs.telegram_chat_id}}
+        channel: ${{inputs.channel}}
+        filename: ${{inputs.filename}}
+        filetype: ${{inputs.filetype}}
+        comment: ${{inputs.comment}}
 
     - run: echo "The time was ${{ steps.hello.outputs.slack_result }}"
       shell: bash
