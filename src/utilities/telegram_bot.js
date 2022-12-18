@@ -41,7 +41,7 @@ export const telegramSend = async (token, file, chatId) => {
         formData.append('file', file);
         formData.append('caption', 'Flutter App');
 
-        TELEGRAM_API = `https://api.telegram.org/bot${token}`;
+        const TELEGRAM_API = `https://api.telegram.org/bot${token}`;
 
         const response = await axios.post(`${TELEGRAM_API}/senddocument`, formData, {
             headers: formData.getHeaders(),
