@@ -33,6 +33,8 @@ async function run() {
       if (filetype) form.append('filetype', filetype);
       if (comment) form.append('initial_comment', initial_comment);
 
+   
+
       slack.send(form);
     }
 
