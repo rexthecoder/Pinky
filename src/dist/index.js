@@ -4199,8 +4199,13 @@ exports.default = _default;
 /***/ }),
 
 /***/ 1027:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
+"use strict";
+__nccwpck_require__.r(__webpack_exports__);
+/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
+/* harmony export */   "manageError": () => (/* binding */ manageError)
+/* harmony export */ });
 const core = __nccwpck_require__(2186);
 
 const manageError = (res, result, resolve, reject) => {
@@ -4224,7 +4229,6 @@ const manageError = (res, result, resolve, reject) => {
 }
 
 
-module.exports = manageError;
 
 /***/ }),
 
@@ -4237,7 +4241,7 @@ __nccwpck_require__.r(__webpack_exports__);
 /* harmony export */   "send": () => (/* binding */ send)
 /* harmony export */ });
 const core = __nccwpck_require__(2186);
-const { manageError } = __nccwpck_require__(1027);
+const error = __nccwpck_require__(1027);
 
 // Send File to client slack channel
 async function send(form) {
@@ -4247,7 +4251,7 @@ async function send(form) {
             if (err) {
                 reject(err);
             } else {
-                manageError(res, result, resolve, reject);
+                error.manageError(res, result, resolve, reject);
             }
         });
     });
@@ -4268,7 +4272,7 @@ __nccwpck_require__.r(__webpack_exports__);
 /* harmony export */ });
 // const core = require('@actions/core');
 const FormData = __nccwpck_require__(4334);
-const { manageError } = __nccwpck_require__(1027);
+const error = __nccwpck_require__(1027);
 
 
 const telegramSend = async (token, file, chatId) => {
@@ -4285,7 +4289,7 @@ const telegramSend = async (token, file, chatId) => {
             if (err) {
                 reject(err);
             } else {
-                manageError(res, result, resolve, reject);
+                error.manageError(res, result, resolve, reject);
                 // res.on("data", (chunk) => { result += chunk; });
                 // res.on("end", () => {
                 //     var data = JSON.parse(result);

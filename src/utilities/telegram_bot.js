@@ -1,6 +1,6 @@
 // const core = require('@actions/core');
 const FormData = require('form-data');
-const { manageError } = require('./form_error');
+const error = require('./form_error');
 
 
 export const telegramSend = async (token, file, chatId) => {
@@ -17,7 +17,7 @@ export const telegramSend = async (token, file, chatId) => {
             if (err) {
                 reject(err);
             } else {
-                manageError(res, result, resolve, reject);
+                error.manageError(res, result, resolve, reject);
                 // res.on("data", (chunk) => { result += chunk; });
                 // res.on("end", () => {
                 //     var data = JSON.parse(result);

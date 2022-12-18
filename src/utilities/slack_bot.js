@@ -1,5 +1,5 @@
 const core = require('@actions/core');
-const { manageError } = require('./form_error');
+const error = require('./form_error');
 
 // Send File to client slack channel
 export async function send(form) {
@@ -9,7 +9,7 @@ export async function send(form) {
             if (err) {
                 reject(err);
             } else {
-                manageError(res, result, resolve, reject);
+                error.manageError(res, result, resolve, reject);
             }
         });
     });
