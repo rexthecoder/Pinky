@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const FormData = require('form-data');
-const { telegramSend } = require('./utilities/telegram_bot');
-const { slack } = require('./utilities/slack_bot');
+const telegram = require('./utilities/telegram_bot');
+const  slack  = require('./utilities/slack_bot');
 var fs = require('fs');
 
 
@@ -20,7 +20,7 @@ async function run() {
 
     /// Send file to telegram incase the token is provided
     if (telegram_token && telegram_chat_id) {
-      telegramSend(telegram_token, fs.createReadStream(path), telegram_chat_id);
+      telegram.telegramSend(telegram_token, fs.createReadStream(path), telegram_chat_id);
     }
 
     /// Send file to slack incase the token is provided
@@ -35,7 +35,7 @@ async function run() {
 
 
 
-      slack(form);
+      slack.send(form);
     }
 
 

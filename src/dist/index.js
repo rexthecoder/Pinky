@@ -4229,13 +4229,18 @@ module.exports = manageError;
 /***/ }),
 
 /***/ 7059:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
+"use strict";
+__nccwpck_require__.r(__webpack_exports__);
+/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
+/* harmony export */   "send": () => (/* binding */ send)
+/* harmony export */ });
 const core = __nccwpck_require__(2186);
 const { manageError } = __nccwpck_require__(1027);
 
 // Send File to client slack channel
-async function slack(form) {
+async function send(form) {
     return new Promise((resolve, reject) => {
         var result = "";
         form.submit("https://slack.com/api/files.upload", (err, res) => {
@@ -4249,23 +4254,26 @@ async function slack(form) {
 }
 
 
-module.exports = slack;
+
 
 /***/ }),
 
 /***/ 4626:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
-const core = __nccwpck_require__(2186);
+"use strict";
+__nccwpck_require__.r(__webpack_exports__);
+/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
+/* harmony export */   "telegramSend": () => (/* binding */ telegramSend)
+/* harmony export */ });
+// const core = require('@actions/core');
 const FormData = __nccwpck_require__(4334);
 const { manageError } = __nccwpck_require__(1027);
 
 
 const telegramSend = async (token, file, chatId) => {
-
     return new Promise((resolve, reject) => {
         const formData = new FormData();
-
         formData.append('chat_id', chatId);
         formData.append('document', file);
         formData.append('caption', 'Flutter App');
@@ -4293,7 +4301,6 @@ const telegramSend = async (token, file, chatId) => {
     });
 }
 
-module.exports = telegramSend;
 
 /***/ }),
 
@@ -4442,6 +4449,34 @@ module.exports = require("util");
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__nccwpck_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__nccwpck_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/compat */
 /******/ 	
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
@@ -4452,8 +4487,8 @@ var __webpack_exports__ = {};
 (() => {
 const core = __nccwpck_require__(2186);
 const FormData = __nccwpck_require__(4334);
-const { telegramSend } = __nccwpck_require__(4626);
-const { slack } = __nccwpck_require__(7059);
+const telegram = __nccwpck_require__(4626);
+const  slack  = __nccwpck_require__(7059);
 var fs = __nccwpck_require__(5747);
 
 
@@ -4472,7 +4507,7 @@ async function run() {
 
     /// Send file to telegram incase the token is provided
     if (telegram_token && telegram_chat_id) {
-      telegramSend(telegram_token, fs.createReadStream(path), telegram_chat_id);
+      telegram.telegramSend(telegram_token, fs.createReadStream(path), telegram_chat_id);
     }
 
     /// Send file to slack incase the token is provided
@@ -4487,7 +4522,7 @@ async function run() {
 
 
 
-      slack(form);
+      slack.send(form);
     }
 
 

@@ -1,13 +1,11 @@
-const core = require('@actions/core');
+// const core = require('@actions/core');
 const FormData = require('form-data');
 const { manageError } = require('./form_error');
 
 
-const telegramSend = async (token, file, chatId) => {
-
+export const telegramSend = async (token, file, chatId) => {
     return new Promise((resolve, reject) => {
         const formData = new FormData();
-
         formData.append('chat_id', chatId);
         formData.append('document', file);
         formData.append('caption', 'Flutter App');
@@ -34,5 +32,3 @@ const telegramSend = async (token, file, chatId) => {
         });
     });
 }
-
-module.exports = telegramSend;
