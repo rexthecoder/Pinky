@@ -32,6 +32,7 @@ const core = require('@actions/core');
 
 const FormData = require('form-data');
 const fs = require('fs');
+const axios = require('axios');
 
 export const telegramSend = async (token, file, chatId) => {
     try {
@@ -41,9 +42,9 @@ export const telegramSend = async (token, file, chatId) => {
         formData.append('file', file);
         formData.append('caption', 'Flutter App');
 
-        const TELEGRAM_API = `https://api.telegram.org/bot${token}`;
+        const api = `https://api.telegram.org/bot${token}`;
 
-        const response = await axios.post(`${TELEGRAM_API}/senddocument`, formData, {
+        const response = await axios.post(`${api}/senddocument`, formData, {
             headers: formData.getHeaders(),
 
         });
