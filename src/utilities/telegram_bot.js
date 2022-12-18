@@ -1,57 +1,38 @@
 const core = require('@actions/core');
-// const { TelegramClient } = require('messaging-api-telegram');
-
-
-// /// Send flutter apke to telegram channel
-// export async function telegramSend(token, file, chatId) {
-
-//     /// Target the client bot using the token
-//     /// Make sure the bot is added to the channel
-//     const client = new TelegramClient({
-//         // accessToken: '1076693551:AAEAuyabC5AyoeHVbfKeOK4UN3yNsfwqX_s',
-//         accessToken: token,
-//     });
-
-//     /// Covert file to curlfile
-//     const file = new CurlFile(file, 'application/vnd.android.package-archive', 'app-release.apk');
-
-//     /// Send the file to the channel
-//     /// You can either provide the user number or the channel id
-//     return new Promise((resolve, reject) => {
-//         try {
-//             // client.sendMessage("-1001171450576", 'Hello World',);
-//             client.sendDocument(chatId, file)
-//             resolve();
-//         } catch (error) {
-//             reject(error);
-//             core.setFailed(error);
-//         }
-//     });
-// }
-
-
 const FormData = require('form-data');
-const fs = require('fs');
-const axios = require('axios');
+const { manageError } = require('./form_error');
 
-export const telegramSend = async (token, file, chatId) => {
-    try {
+
+const telegramSend = async (token, file, chatId) => {
+
+    return new Promise((resolve, reject) => {
         const formData = new FormData();
 
         formData.append('chat_id', chatId);
-        formData.append('file', file);
+        formData.append('document', file);
         formData.append('caption', 'Flutter App');
 
         const api = `https://api.telegram.org/bot${token}`;
-
-        const response = await axios.post(`${api}/senddocument`, formData, {
-            headers: formData.getHeaders(),
-
+        var result = "";
+        formData.submit(`${api}/senddocument`, (err, res) => {
+            // stop promise when code is finish running
+            if (err) {
+                reject(err);
+            } else {
+                manageError(res, result, resolve, reject);
+                // res.on("data", (chunk) => { result += chunk; });
+                // res.on("end", () => {
+                //     var data = JSON.parse(result);
+                //     if (data.ok) {
+                //         resolve(data);
+                //     } else {
+                //         core.setFailed(data.description);
+                //         reject(data.description);
+                //     }
+                // });
+            }
         });
-
-        return res.send();
-    } catch (err) {
-        console.log(err);
-        core.setFailed(err);
-    }
+    });
 }
+
+module.exports = telegramSend;
