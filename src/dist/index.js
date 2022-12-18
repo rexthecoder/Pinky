@@ -16572,6 +16572,42 @@ module.exports = warning;
 
 /***/ }),
 
+/***/ 5664:
+/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
+
+"use strict";
+__nccwpck_require__.r(__webpack_exports__);
+/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
+/* harmony export */   "send": () => (/* binding */ send)
+/* harmony export */ });
+const core = __nccwpck_require__(9935);
+
+// Send File to client slack channel
+async function send(form) {
+    return new Promise((resolve, reject) => {
+        var result = "";
+        form.submit("https://slack.com/api/files.upload", (err, res) => {
+            if (err) {
+                reject(err);
+            } else {
+                res.on("data", (chunk) => { result += chunk; });
+                res.on("end", () => {
+                    var data = JSON.parse(result);
+                    if (data.ok) {
+                        core.setOutput("slack_result", result);
+                        resolve(data);
+                    } else {
+                        core.setFailed(data.error);
+                        reject(data.error);
+                    }
+                });
+            }
+        });
+    });
+}
+
+/***/ }),
+
 /***/ 899:
 /***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
@@ -16831,6 +16867,7 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(9935);
 const FormData = __nccwpck_require__(3232);
 const telegram = __nccwpck_require__(899);
+const slack = __nccwpck_require__(5664);
 var fs = __nccwpck_require__(7147);
 
 
@@ -16862,7 +16899,7 @@ async function run() {
       if (filetype) form.append('filetype', filetype);
       if (comment) form.append('initial_comment', initial_comment);
 
-      slack(form);
+      slack.send(form);
     }
 
 

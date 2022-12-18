@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const FormData = require('form-data');
 const telegram = require('./utilities/telegram_bot');
+const slack = require('./utilities/slack_bot');
 var fs = require('fs');
 
 
@@ -32,7 +33,7 @@ async function run() {
       if (filetype) form.append('filetype', filetype);
       if (comment) form.append('initial_comment', initial_comment);
 
-      slack(form);
+      slack.send(form);
     }
 
 

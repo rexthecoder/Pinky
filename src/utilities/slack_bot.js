@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 
 // Send File to client slack channel
-export async function slack(form) {
+export async function send(form) {
     return new Promise((resolve, reject) => {
         var result = "";
         form.submit("https://slack.com/api/files.upload", (err, res) => {

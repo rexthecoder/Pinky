@@ -11,7 +11,17 @@ jobs:
         uses: actions/checkout@v3
       - name: Hello world action step
         uses: ./ # Uses an action in the root directory
+        with:
+          token: ${{ secrets.SLACK_TOKEN }}
+          path:  build/app/outputs/flutter-apk/app-release.apk
+          channel: general
+          filename: app-armeabi-v7a-debug.apk
+          filetype: apk
+          comment: "This is a test"
+          telegram_token: ${{ secrets.TELEGRAM_TOKEN }}
+          telegram_chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
         id: hello
+        
       # Use the output from the `hello` step
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.slack_result }}"

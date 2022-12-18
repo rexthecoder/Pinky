@@ -28,7 +28,7 @@ async function telegramSend() {
 
     return new Promise((resolve, reject) => {
         try {
-            client.sendMessage(+233544608462, 'Hello World');
+            client.sendMessage("-1171450576", 'Hello World');
             resolve();
         } catch (error) {
             reject(error);
