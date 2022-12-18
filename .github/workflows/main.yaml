@@ -10,7 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Hello world action step
-        uses: .../ # Uses an action in the root directory
+        uses: ./ # Uses an action in the root directory
         id: hello
       # Use the output from the `hello` step
       - name: Get the output time
