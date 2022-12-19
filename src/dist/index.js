@@ -4217,8 +4217,8 @@ async function send(path, webhookUrl, comment) {
         formData.append('content', comment)
         formData.submit(webhookUrl, (err, res) => {
             if (err != null) {
-                reject(err);
                 core.setFailed(err.message)
+                reject(err);
             } else {
                 core.info('successfully uploaded file')
                 resolve(res.statusCode)

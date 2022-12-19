@@ -4,7 +4,7 @@
   "description": "Flutter git action that makes you do more",
   "main": "index.js",
   "scripts": {
-    "test": "jest --detectOpenHandles",
+    "test": "jest",
     "prepare": "ncc build src/index.js --license licenses.txt -o src/dist --source-map"
   },
   "author": "",
