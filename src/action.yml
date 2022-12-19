@@ -1,5 +1,5 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Pinky Generator'
+description: 'Flutter git action that makes you do more'
 inputs:
   path:
     description: 'Path to file'
