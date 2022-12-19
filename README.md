@@ -76,7 +76,7 @@ jobs:
 - Copy your channel id. The channel you want the apk to be sent to. ( Make sure the bot has been added over there).
 
 
-## How to get the telegram channel id
+## How to get Telegram channel id
 
 > Skip step 2 if your channel is public
 
