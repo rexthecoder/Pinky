@@ -4,11 +4,11 @@ const path = require('path');
 const core = require('@actions/core');
 const FormData = require('form-data');
 const fs = require('fs');
-const { manageError } = require('./src/utilities/form_error');
+
 
 
 test('throws invalid number', async () => {
-    await telegramSend('1076693551:AAEAuyabC5AyoeHVbfKeOK4UN3yNsfwqX_s', fs.createReadStream('./quick.js'), '-1001171450576');
+  await telegramSend().then((result) => console.log(result));
 });
 
 
@@ -20,32 +20,20 @@ test('throws invalid number', async () => {
 //     console.log(result);
 // })
 
-const telegramSend = async (token, file, chatId) => {
+const telegramSend = async () => {
     return new Promise((resolve, reject) => {
-        const formData = new FormData();
-
-        formData.append('chat_id', chatId);
-        formData.append('document', file);
-        formData.append('caption', 'Flutter App');
-
-        const api = `https://api.telegram.org/bot${token}`;
+        const formData = new FormData()
+        formData.append('upload-file', fs.createReadStream('./quick.js'))
+        formData.append('content', "Hello")
         var result = "";
-        formData.submit(`${api}/senddocument`, (err, res) => {
-            // stop promise when code is finish running
-            if (err) {
-                reject(err);
+        formData.submit('https://discord.com/api/webhooks/1054179692653051954/T7lUtdL1Z6rVGWI-udQv7iQ0rsHtZEISZW1ZyzkZdiiJL0oa9tM6y8C2HeL0PX5bsauO', (error, res) => {
+            if (error != null) {
+                reject(error);
+                core.setFailed(error.message)
             } else {
-                res.on("data", (chunk) => { result += chunk; });
-                res.on("end", () => {
-                    var data = JSON.parse(result);
-                    if (data.ok) {
-                        resolve(data);
-                    } else {
-                        reject(data.description);
-                        
-                    }
-                });
+                core.info('successfully uploaded file')
+                resolve(res.statusCode)
             }
-        });
+        })
     });
 }

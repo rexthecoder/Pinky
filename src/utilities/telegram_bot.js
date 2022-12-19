@@ -15,7 +15,7 @@ export const telegramSend = async (token, file, chatId, comment) => {
             if (err) {
                 reject(err);
             } else {
-                error.manageError(res, result, resolve, reject);
+                error.manageError(res,resolve, reject);
             }
         });
     });

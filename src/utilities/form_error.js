@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 
-export const manageError = (res, result, resolve, reject) => {
+export const manageError = (res,resolve, reject) => {
+    var result = "";
     res.on("data", (chunk) => { result += chunk; });
     res.on("end", () => {
         var data = JSON.parse(result);
