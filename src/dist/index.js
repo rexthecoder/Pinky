@@ -4210,11 +4210,19 @@ const FormData = __nccwpck_require__(4334);
 const core = __nccwpck_require__(2186);
 var fs = __nccwpck_require__(5747);
 
-async function send(path, webhookUrl, comment) {
+// Send File to client discord channel
+// @param {String} path - Path of the file to send
+// @param {String} webhookUrl - Url of the webhook
+// @param {String} comment - Comment to send with the file
+// @returns {Promise} - Promise that resolve or reject based on the response from discord
+const send = async (path, webhookUrl, comment) => {
     return new Promise((resolve, reject) => {
         const formData = new FormData()
+        // Add file to form
         formData.append('upload-file', fs.createReadStream(path))
+        // Add comment to form
         formData.append('content', comment)
+        // Submit form to discord
         formData.submit(webhookUrl, (err, res) => {
             if (err != null) {
                 core.setFailed(err.message)
@@ -4240,7 +4248,12 @@ __nccwpck_require__.r(__webpack_exports__);
 /* harmony export */ });
 const core = __nccwpck_require__(2186);
 
-const manageError = (res,resolve, reject) => {
+
+/// Function that manage the error based on the response from the form request
+/// @param {Object} res - Response from slack
+/// @param {Function} resolve - Function to resolve the promise
+/// @param {Function} reject - Function to reject the promise
+const manageError = async (res,resolve, reject) => {
     var result = "";
     res.on("data", (chunk) => { result += chunk; });
     res.on("end", () => {
@@ -4277,12 +4290,18 @@ const core = __nccwpck_require__(2186);
 const error = __nccwpck_require__(1027);
 
 // Send File to client slack channel
-async function send(form) {
+// @param {Object} form - Form to send to slack
+// @returns {Promise} - Promise that resolve or reject based on the response from slack
+const send = async (form) => {
     return new Promise((resolve, reject) => {
+        // Submit form to slack
         form.submit("https://slack.com/api/files.upload", (err, res) => {
             if (err) {
+                // if error, reject promise and log error
+                core.setFailed(err);
                 reject(err);
             } else {
+                // Manage the error based the response from slack
                 error.manageError(res, resolve, reject);
             }
         });
@@ -4306,14 +4325,21 @@ __nccwpck_require__.r(__webpack_exports__);
 const FormData = __nccwpck_require__(4334);
 const error = __nccwpck_require__(1027);
 
-
+// Send File to client telegram channel
+// @param {String} token - Token of the bot
+// @param {Object} file - File to send
+// @param {String} chatId - Id of the chat
+// @param {String} comment - Comment to send with the file
+// @returns {Promise} - Promise that resolve or reject based on the response from telegram
 const telegramSend = async (token, file, chatId, comment) => {
     return new Promise((resolve, reject) => {
         const formData = new FormData();
+        // Add the chat id to the form
         formData.append('chat_id', chatId);
+        // Add the file to the form
         formData.append('document', file);
+        // Add the comment to the form
         formData.append('caption', comment);
-
         const api = `https://api.telegram.org/bot${token}`;
         formData.submit(`${api}/senddocument`, (err, res) => {
             if (err) {

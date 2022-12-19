@@ -16,9 +16,10 @@ inputs:
     required: false
     default: 'stable'
 
-  path:  # id of input
+  path: 
     description: 'Path to file'
-    required: true
+    required: false
+    default: 'build/app/outputs/flutter-apk/app-release.apk'
 
   slack_token:
     description: 'Slack token'
@@ -39,14 +40,17 @@ inputs:
   filename: 
     description: 'Filename of file'
     required: false
+    default: 'pinky.apk'
     
   filetype:
     description: 'A file type identifier.'
     required: false
+    default: 'apk'
 
   comment:
     description: 'The message text introducing the file in specified channels.'
     required: false
+    default: 'New build'
 
   webhook_url:
     description: 'The webhook url to send the message to.'

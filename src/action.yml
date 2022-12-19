@@ -1,7 +1,7 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
-  path:  # id of input
+  path:
     description: 'Path to file'
     required: true
   slack_token: 

@@ -1,6 +1,11 @@
 const core = require('@actions/core');
 
-export const manageError = (res,resolve, reject) => {
+
+/// Function that manage the error based on the response from the form request
+/// @param {Object} res - Response from slack
+/// @param {Function} resolve - Function to resolve the promise
+/// @param {Function} reject - Function to reject the promise
+export const manageError = async (res,resolve, reject) => {
     var result = "";
     res.on("data", (chunk) => { result += chunk; });
     res.on("end", () => {
