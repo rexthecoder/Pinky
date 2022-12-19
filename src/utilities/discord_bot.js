@@ -1,7 +1,6 @@
 const FormData = require('form-data');
 const core = require('@actions/core');
 var fs = require('fs');
-const error = require('./form_error.js');
 
 export async function send(path, webhookUrl, comment) {
     return new Promise((resolve, reject) => {

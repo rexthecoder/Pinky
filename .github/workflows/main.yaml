@@ -20,7 +20,7 @@ jobs:
           comment: "This is a test"
           telegram_token: ${{ secrets.TELEGRAM_TOKEN }}
           telegram_chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
-          webhook_url: "https://discord.com/api/webhooks/1054179692653051954/T7lUtdL1Z6rVGWI-udQv7iQ0rsHtZEISZW1ZyzkZdiiJL0oa9tM6y8C2HeL0PX5bsauO"
+          webhook_url: ${{ secrets.WEBHOOK_URL }}
         id: hello
         
       # Use the output from the `hello` step

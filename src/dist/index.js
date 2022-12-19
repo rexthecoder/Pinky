@@ -4209,7 +4209,6 @@ __nccwpck_require__.r(__webpack_exports__);
 const FormData = __nccwpck_require__(4334);
 const core = __nccwpck_require__(2186);
 var fs = __nccwpck_require__(5747);
-const error = __nccwpck_require__(1027);
 
 async function send(path, webhookUrl, comment) {
     return new Promise((resolve, reject) => {
