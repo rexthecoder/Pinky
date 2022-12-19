@@ -12,7 +12,7 @@ jobs:
       - name: Hello world action step
         uses: ./ # Uses an action in the root directory
         with:
-          token: ${{ secrets.SLACK_TOKEN }}
+          slack_token: ${{ secrets.SLACK_TOKEN }}
           path:  build/app/outputs/flutter-apk/app-release.apk
           channel: general
           filename: app-armeabi-v7a-debug.apk
