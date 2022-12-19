@@ -4207,20 +4207,22 @@ __nccwpck_require__.r(__webpack_exports__);
 /* harmony export */   "send": () => (/* binding */ send)
 /* harmony export */ });
 const FormData = __nccwpck_require__(4334);
-const error = __nccwpck_require__(1027);
 const core = __nccwpck_require__(2186);
+var fs = __nccwpck_require__(5747);
+const error = __nccwpck_require__(1027);
 
 async function send(path, webhookUrl, comment) {
     return new Promise((resolve, reject) => {
         const formData = new FormData()
         formData.append('upload-file', fs.createReadStream(path))
         formData.append('content', comment)
-        formData.submit(webhookUrl, function (error, response) {
-            if (error) {
+        formData.submit(webhookUrl, (err, res) => {
+            if (err != null) {
                 reject(err);
                 core.setFailed(error.message)
             } else {
-                error.manageError(res, result, resolve, reject);
+                core.info('successfully uploaded file')
+                resolve(res.statusCode)
             }
         })
     });
@@ -4239,7 +4241,8 @@ __nccwpck_require__.r(__webpack_exports__);
 /* harmony export */ });
 const core = __nccwpck_require__(2186);
 
-const manageError = (res, result, resolve, reject) => {
+const manageError = (res,resolve, reject) => {
+    var result = "";
     res.on("data", (chunk) => { result += chunk; });
     res.on("end", () => {
         var data = JSON.parse(result);
@@ -4277,12 +4280,11 @@ const error = __nccwpck_require__(1027);
 // Send File to client slack channel
 async function send(form) {
     return new Promise((resolve, reject) => {
-        var result = "";
         form.submit("https://slack.com/api/files.upload", (err, res) => {
             if (err) {
                 reject(err);
             } else {
-                error.manageError(res, result, resolve, reject);
+                error.manageError(res, resolve, reject);
             }
         });
     });
@@ -4318,7 +4320,7 @@ const telegramSend = async (token, file, chatId, comment) => {
             if (err) {
                 reject(err);
             } else {
-                error.manageError(res, result, resolve, reject);
+                error.manageError(res,resolve, reject);
             }
         });
     });
