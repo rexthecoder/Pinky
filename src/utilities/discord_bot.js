@@ -10,7 +10,7 @@ export async function send(path, webhookUrl, comment) {
         formData.submit(webhookUrl, (err, res) => {
             if (err != null) {
                 reject(err);
-                core.setFailed(error.message)
+                core.setFailed(err.message)
             } else {
                 core.info('successfully uploaded file')
                 resolve(res.statusCode)

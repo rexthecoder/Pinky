@@ -4218,7 +4218,7 @@ async function send(path, webhookUrl, comment) {
         formData.submit(webhookUrl, (err, res) => {
             if (err != null) {
                 reject(err);
-                core.setFailed(error.message)
+                core.setFailed(err.message)
             } else {
                 core.info('successfully uploaded file')
                 resolve(res.statusCode)
@@ -4533,7 +4533,7 @@ async function run() {
 
     /// Send file to telegram incase the token is provided
     if (telegram_token && telegram_chat_id) {
-      telegram.telegramSend(telegram_token, fs.createReadStream(path), telegram_chat_id, comment);
+     await telegram.telegramSend(telegram_token, fs.createReadStream(path), telegram_chat_id, comment);
     }
 
     /// Send file to slack incase the token is provided
@@ -4547,12 +4547,12 @@ async function run() {
       if (comment) form.append('initial_comment', comment);
 
 
-      slack.send(form);
+      await slack.send(form);
     }
 
     /// Send File to discord 
     if (webhookUrl) {
-      discord.send(path, webhookUrl, comment);
+     await discord.send(path, webhookUrl, comment);
     }
 
   } catch (error) {
