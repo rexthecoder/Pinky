@@ -71,7 +71,6 @@ runs:
       shell: bash
 
     - uses: ./src/
-      id: hello
       with:
         path: ${{inputs.path}}
         slack_token: ${{inputs.slack_token}}
@@ -82,7 +81,4 @@ runs:
         filetype: ${{inputs.filetype}}
         comment: ${{inputs.comment}}
         webhook_url: ${{inputs.webhook_url}}
-
-    - run: echo "The time was ${{ steps.hello.outputs.slack_result }}"
-      shell: bash
 
