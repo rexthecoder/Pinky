@@ -4198,6 +4198,37 @@ exports.default = _default;
 
 /***/ }),
 
+/***/ 4317:
+/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
+
+"use strict";
+__nccwpck_require__.r(__webpack_exports__);
+/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
+/* harmony export */   "send": () => (/* binding */ send)
+/* harmony export */ });
+const FormData = __nccwpck_require__(4334);
+const error = __nccwpck_require__(1027);
+const core = __nccwpck_require__(2186);
+
+async function send(path, webhookUrl, comment) {
+    return new Promise((resolve, reject) => {
+        const formData = new FormData()
+        formData.append('upload-file', fs.createReadStream(path))
+        formData.append('content', comment)
+        formData.submit(webhookUrl, function (error, response) {
+            if (error) {
+                reject(err);
+                core.setFailed(error.message)
+            } else {
+                error.manageError(res, result, resolve, reject);
+            }
+        })
+    });
+}
+
+
+/***/ }),
+
 /***/ 1027:
 /***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
@@ -4275,31 +4306,19 @@ const FormData = __nccwpck_require__(4334);
 const error = __nccwpck_require__(1027);
 
 
-const telegramSend = async (token, file, chatId) => {
+const telegramSend = async (token, file, chatId, comment) => {
     return new Promise((resolve, reject) => {
         const formData = new FormData();
         formData.append('chat_id', chatId);
         formData.append('document', file);
-        formData.append('caption', 'Flutter App');
+        formData.append('caption', comment);
 
         const api = `https://api.telegram.org/bot${token}`;
-        var result = "";
         formData.submit(`${api}/senddocument`, (err, res) => {
-            // stop promise when code is finish running
             if (err) {
                 reject(err);
             } else {
                 error.manageError(res, result, resolve, reject);
-                // res.on("data", (chunk) => { result += chunk; });
-                // res.on("end", () => {
-                //     var data = JSON.parse(result);
-                //     if (data.ok) {
-                //         resolve(data);
-                //     } else {
-                //         core.setFailed(data.description);
-                //         reject(data.description);
-                //     }
-                // });
             }
         });
     });
@@ -4492,7 +4511,8 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const FormData = __nccwpck_require__(4334);
 const telegram = __nccwpck_require__(4626);
-const  slack  = __nccwpck_require__(7059);
+const slack = __nccwpck_require__(7059);
+const discord = __nccwpck_require__(4317);
 var fs = __nccwpck_require__(5747);
 
 
@@ -4507,11 +4527,12 @@ async function run() {
     const comment = core.getInput('comment');
     const telegram_token = core.getInput('telegram_token');
     const telegram_chat_id = core.getInput('telegram_chat_id');
+    const webhookUrl = core.getInput('webhook_url');
 
 
     /// Send file to telegram incase the token is provided
     if (telegram_token && telegram_chat_id) {
-      telegram.telegramSend(telegram_token, fs.createReadStream(path), telegram_chat_id);
+      telegram.telegramSend(telegram_token, fs.createReadStream(path), telegram_chat_id, comment);
     }
 
     /// Send file to slack incase the token is provided
@@ -4525,10 +4546,13 @@ async function run() {
       if (comment) form.append('initial_comment', comment);
 
 
-
       slack.send(form);
     }
 
+    /// Send File to discord 
+    if (webhookUrl) {
+      discord.send(path, webhookUrl, comment);
+    }
 
   } catch (error) {
     console.log(error);

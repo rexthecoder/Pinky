@@ -1,7 +1,8 @@
 const core = require('@actions/core');
 const FormData = require('form-data');
 const telegram = require('./utilities/telegram_bot');
-const  slack  = require('./utilities/slack_bot');
+const slack = require('./utilities/slack_bot');
+const discord = require('./utilities/discord_bot');
 var fs = require('fs');
 
 
@@ -16,11 +17,12 @@ async function run() {
     const comment = core.getInput('comment');
     const telegram_token = core.getInput('telegram_token');
     const telegram_chat_id = core.getInput('telegram_chat_id');
+    const webhookUrl = core.getInput('webhook_url');
 
 
     /// Send file to telegram incase the token is provided
     if (telegram_token && telegram_chat_id) {
-      telegram.telegramSend(telegram_token, fs.createReadStream(path), telegram_chat_id);
+      telegram.telegramSend(telegram_token, fs.createReadStream(path), telegram_chat_id, comment);
     }
 
     /// Send file to slack incase the token is provided
@@ -34,10 +36,13 @@ async function run() {
       if (comment) form.append('initial_comment', comment);
 
 
-
       slack.send(form);
     }
 
+    /// Send File to discord 
+    if (webhookUrl) {
+      discord.send(path, webhookUrl, comment);
+    }
 
   } catch (error) {
     console.log(error);

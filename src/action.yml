@@ -27,6 +27,10 @@ inputs:
     description: 'The message text introducing the file in specified channels.'
     required: false
 
+  webhook_url:
+    description: 'The webhook url to send the message to.'
+    required: false
+
 outputs:
   slack_result: # id of output
     description: 'Output from slack'
