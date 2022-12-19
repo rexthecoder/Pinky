@@ -94,7 +94,7 @@ jobs:
  - Watch this [`video`](https://www.youtube.com/watch?v=wzdZLWonn0Y) to learn how to get your webhook. 
  - Copy the webhook link and provide it to `webhook_url`
 
- That all you need to get discord to work.
+ That's all you need to get discord to work.
 
 
 
