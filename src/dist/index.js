@@ -4522,7 +4522,7 @@ async function run() {
       if (filename) form.append('filename', filename);
       if (channel) form.append('channels', channel);
       if (filetype) form.append('filetype', filetype);
-      if (comment) form.append('initial_comment', initial_comment);
+      if (comment) form.append('initial_comment', comment);
 
 
 
