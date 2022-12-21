@@ -1,7 +1,7 @@
 {
   "name": "pinky",
   "version": "1.0.0",
-  "description": "Flutter git action that makes you do more",
+  "description": "Flutter github action allows to auto submit apk or ipa file to various platform",
   "main": "index.js",
   "scripts": {
     "test": "jest",
