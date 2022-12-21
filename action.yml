@@ -70,7 +70,8 @@ runs:
     - run: flutter build apk 
       shell: bash
 
-    - uses: rexthecoder/Pinky@v1.2/src/
+    - name: Pinky Generator
+      uses: rexthecoder/Pinky-Generator@1.0
       with:
         path: ${{inputs.path}}
         slack_token: ${{inputs.slack_token}}
