@@ -20,6 +20,7 @@ Pinky allows you to deploy flutter apk to various platform at ease. Currently, w
 | filename              | `false`  | The name you want to give to the file  |
 | comment               | `false`  | The message you want to attach to the file while sending it                                                                                                                                |
 | webhook_url     | `false`  |  Your discord webhook url.                                                                                                                             |
+| usePicky | `false` |  Indicate either you wanna use our picky bot |
 
 
 ## Usage
@@ -49,6 +50,15 @@ jobs:
           webhook_url: ${{ secrets.WEBHOOK_URL }}
 
 `````
+
+## Using Our Slack Bot
+- Set `usePicky` to true
+
+- Click on the below button
+
+<a href="https://slack.com/oauth/v2/authorize?client_id=3905572188451.3906519311234&scope=app_mentions:read,channels:history,chat:write,chat:write.public,commands,groups:history,im:history,im:read,im:write,files:write&user_scope="><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
+
+- set the channel you added the bot to. eg. `channel:general`
 
 ## Setting up  Telegram
 
