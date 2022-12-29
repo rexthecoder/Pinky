@@ -71,7 +71,7 @@ runs:
         channel: ${{inputs.flutter_channel}}
     - run: flutter pub get
       shell: bash
-    - run: flutter build apk 
+    - run: flutter build apk  --split-per-abi
       shell: bash
 
     - name: Pinky Generator
