@@ -56,6 +56,9 @@ inputs:
     description: 'The webhook url to send the message to.'
     required: false
     
+  zip:
+   description: 'Allow you to zip the file'
+   required: false
 
 
 runs:
@@ -82,4 +85,5 @@ runs:
         filetype: ${{inputs.filetype}}
         comment: ${{inputs.comment}}
         webhook_url: ${{inputs.webhook_url}}
+        zip: ${{inputs.zip}}
 
