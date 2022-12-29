@@ -72,6 +72,8 @@ runs:
       shell: bash
     - run: flutter build apk --debug --split-per-abi
       shell: bash
+    - run: flutter build ios --debug --no-codesign
+      shell: bash
 
     - name: Pinky Generator
       uses: rexthecoder/Pinky-Generator@1.2
