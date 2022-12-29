@@ -59,6 +59,7 @@ inputs:
   zip:
    description: 'Allow you to zip the file'
    required: false
+   default: false
 
 
 runs:
