@@ -72,7 +72,7 @@ runs:
       shell: bash
     - run: flutter build apk --debug --split-per-abi
       shell: bash
-    - run: flutter build ios --no-codesign
+    - run: flutter build ios --release --no-codesign
       shell: bash
 
     - name: Pinky Generator
