@@ -60,25 +60,29 @@ inputs:
    description: 'Indicate either you wanna use our picky bot'
    required: false
 
-  # web: 
-  #  description: 'Deploy Flutter web with git pages'
-  #  required: false
-  #  default: false
+  web: 
+   description: 'Deploy Flutter web with git pages'
+   required: false
+   default: false
 
 
 
 runs:
   using: "composite"
   steps:  
-    - name: Setting up Flutter 🦋
-    - uses: subosito/flutter-action@v2
+    - name: Spining Flutter 🦋
+      uses: subosito/flutter-action@v2
       with:
         flutter-version: ${{inputs.flutter_version}}
         channel: ${{inputs.flutter_channel}}
     - run: flutter pub get
       shell: bash
+    
+    - name: Building Flutter apk 👓
     - run: flutter build apk --profile --split-per-abi
       shell: bash
+
+    - name: Building Flutter Web ⛑️
       # if: ${{ inputs.web }} == 'true' 
     - run: flutter build web
       shell: bash
