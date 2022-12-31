@@ -77,12 +77,8 @@ runs:
         channel: ${{inputs.flutter_channel}}
     - run: flutter pub get
       shell: bash
-    
-    - name: Building Flutter apk 👓
     - run: flutter build apk --profile --split-per-abi
       shell: bash
-
-    - name: Building Flutter Web ⛑️
       # if: ${{ inputs.web }} == 'true' 
     - run: flutter build web
       shell: bash
