@@ -19,7 +19,7 @@ inputs:
   path: 
     description: 'Path to file'
     required: false
-    default: 'build/app/outputs/flutter-apk/app-release.apk'
+    default: build/app/outputs/flutter-apk/app-armeabi-v7a-debug.apk
 
   slack_token:
     description: 'Slack token'
@@ -109,6 +109,6 @@ runs:
       # if: ${{ inputs.web }} == 'true' 
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-        folder: /build/web
+        folder: build/web/
 
 
