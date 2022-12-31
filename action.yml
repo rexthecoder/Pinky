@@ -83,7 +83,7 @@ runs:
       shell: bash
 
     - name: Building Flutter Web ⛑️
-      if: ${{ inputs.web }} == 'true' 
+      # if: ${{ inputs.web }} == 'true' 
     - run: flutter build web
       shell: bash
 
@@ -103,7 +103,7 @@ runs:
         usePicky: ${{inputs.usePicky}}
     
     - name: Deploying web 🚀
-      if: ${{ inputs.web }} == 'true' 
+      # if: ${{ inputs.web }} == 'true' 
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: /build/web
