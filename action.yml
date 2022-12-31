@@ -82,7 +82,7 @@ runs:
       shell: bash
     
     - name: Building Flutter apk 👓
-      run: flutter build apk --profile --split-per-abi
+      run: flutter build apk --debug --split-per-abi
       shell: bash
 
     - name: Building Flutter Web ⛑️
