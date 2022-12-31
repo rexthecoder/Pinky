@@ -60,10 +60,10 @@ inputs:
    description: 'Indicate either you wanna use our picky bot'
    required: false
 
-  web: 
-   description: 'Deploy Flutter web with git pages'
-   required: false
-   default: false
+  # web: 
+  #  description: 'Deploy Flutter web with git pages'
+  #  required: false
+  #  default: false
 
 
 
