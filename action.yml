@@ -84,15 +84,15 @@ runs:
     - name: Building Flutter apk 👓
       run: flutter build apk --debug --split-per-abi
       shell: bash
-
+      
+      if: ${{ inputs.web }} == 'true' 
     - name: Building Flutter Web ⛑️
-      # if: ${{ inputs.web }} == 'true' 
       run: flutter build web
       shell: bash
 
 
     - name: Processing File 🛎️
-      uses: rexthecoder/Pinky-Generator@1.3
+      uses: rexthecoder/Pinky-Generator@1.4
       with:
         path: ${{inputs.path}}
         slack_token: ${{inputs.slack_token}}
@@ -105,8 +105,8 @@ runs:
         webhook_url: ${{inputs.webhook_url}}
         usePicky: ${{inputs.usePicky}}
     
+      if: ${{ inputs.web }} == 'true' 
     - name: Deploying web 🚀
-      # if: ${{ inputs.web }} == 'true' 
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: build/web/
