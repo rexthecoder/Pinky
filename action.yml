@@ -96,7 +96,7 @@ runs:
 
 
     - name: Processing File 🛎️
-      uses: rexthecoder/Pinky-Generator@1.6
+      uses: rexthecoder/Pinky-Generator@1.7
       with:
         path: ${{inputs.path}}
         slack_token: ${{inputs.slack_token}}
