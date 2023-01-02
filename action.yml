@@ -36,6 +36,10 @@ inputs:
   channel:
     description: 'Slack channels'
     required: false
+  
+  channel_id:
+    description: "Slack channel's id"
+    required: true
 
   filename: 
     description: 'Filename of file'
@@ -85,14 +89,14 @@ runs:
       run: flutter build apk --debug --split-per-abi
       shell: bash
       
-      if: ${{ inputs.web }} == 'true' 
     - name: Building Flutter Web ⛑️
+      if: ${{ inputs.web == 'true'  }} 
       run: flutter build web
       shell: bash
 
 
     - name: Processing File 🛎️
-      uses: rexthecoder/Pinky-Generator@1.4
+      uses: rexthecoder/Pinky-Generator@1.5
       with:
         path: ${{inputs.path}}
         slack_token: ${{inputs.slack_token}}
@@ -103,10 +107,11 @@ runs:
         filetype: ${{inputs.filetype}}
         comment: ${{inputs.comment}}
         webhook_url: ${{inputs.webhook_url}}
+        channel_id: ${{inputs.channel_id}}
         usePicky: ${{inputs.usePicky}}
     
-      if: ${{ inputs.web }} == 'true' 
     - name: Deploying web 🚀
+      if: ${{ inputs.web }} == 'true' 
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: build/web/
