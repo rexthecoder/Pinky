@@ -96,13 +96,12 @@ runs:
 
 
     - name: Processing File 🛎️
-      uses: rexthecoder/Pinky-Generator@1.5
+      uses: rexthecoder/Pinky-Generator@1.6
       with:
         path: ${{inputs.path}}
         slack_token: ${{inputs.slack_token}}
         telegram_token: ${{inputs.telegram_token}}
         telegram_chat_id: ${{inputs.telegram_chat_id}}
-        channel: ${{inputs.channel}}
         filename: ${{inputs.filename}}
         filetype: ${{inputs.filetype}}
         comment: ${{inputs.comment}}
